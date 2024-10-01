@@ -214,6 +214,10 @@ const getAnswerChosen = () => {
       ];
       break;
     case 2:
+      firstQuestion.value = "Merci pour ta réponse !";
+      suggested_answers.value = [];
+      break;
+    case 3:
       firstQuestion.value = "Tu paies combien 💰 actuellement ?";
       suggested_answers.value = [
         { answer: "Moins 20 €", answerImg: null },
@@ -223,7 +227,11 @@ const getAnswerChosen = () => {
         { answer: "Je ne sais pas", answerImg: null },
       ];
       break;
-    case 3:
+    case 4:
+      firstQuestion.value = "Merci pour ta réponse !";
+      suggested_answers.value = [];
+      break;
+    case 5:
       firstQuestion.value = "Et, es-tu toujours engagé(e) stp ?";
       suggested_answers.value = [
         { answer: "Oui", answerImg: null },
@@ -231,12 +239,29 @@ const getAnswerChosen = () => {
         { answer: "NSP", answerImg: null },
       ];
       break;
-    case 4:
+    case 6:
       firstQuestion.value = "Note tes coordonnées juste ici 👇";
       suggested_answers.value = [
         { answer: "Je découvre mon offre", answerImg: null },
       ];
       break;
+    case 7:
+      firstQuestion.value = "Merci pour tes informations !";
+      suggested_answers.value = [];
+      break;
+    case 8:
+      firstQuestion.value = "Nous allons maintenant te proposer les meilleures offres.";
+      suggested_answers.value = [];
+      break;
+  }
+
+  // Si le case n'a pas de réponses suggérées, passer au case suivant
+  if (suggested_answers.value.length === 0) {
+    conversationHistory.value.push({ text: firstQuestion.value, type: "bot" });
+    weight.value++;
+    getAnswerChosen();
+  } else {
+    showQuestion.value = true;
   }
 };
 
